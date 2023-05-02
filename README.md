@@ -37,14 +37,14 @@ custom-action:
         target_workflow: ci-workflow.yml
 ```
 
-1. In the job, specify the required inputs:
+2. In the job, specify the required inputs:
 - **`ci_token`**: a GitHub token for the CI.
 - **`root_token`**: a personal access token with the **`repo`** scope to access all repos of the organization.
 - **`target_owner`**: the organization (xotoscript).
 - **`target_submodules`**: a list of submodules in the repository.
 - **`target_branch`**: the name of the branch of the current pull request.
 - **`target_workflow`**: the name of the workflow file to use.
-1. Run the workflow.
+3. Run the workflow.
 
 The action will automatically create a bot comment in the root pull request, listing all pull requests of submodules, including their status and pipeline.
 
