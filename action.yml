@@ -1,0 +1,21 @@
+name: '@xotoscript/xotoscript-action-submodules'
+description: 'Custom app pr action'
+author: 'Xotostack'
+inputs:
+  ci_token:
+    description: 'secrets.GITHUB_TOKEN'
+  root_token:
+    description: 'secrets.GH_PAT'
+  target_owner:
+    description: 'Repo owner'
+  target_submodules:
+    description: 'Repo submodules'
+  target_branch:
+    description: 'Target branch name'
+  target_workflow:
+    description: 'Target workflow file (like pr-workflow.yml)'
+
+  
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
