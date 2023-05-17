@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
 import * as github from "@actions/github"
 import { Octokit, } from "octokit";
+import { CommentTypes } from './types/CommentTypes';
 
 async function getTargetPrData(targetOwner: string, targetRepo: string, targetBranch: string) {
   const api = new Octokit({
@@ -22,9 +23,7 @@ async function getTargetPrData(targetOwner: string, targetRepo: string, targetBr
 }
 
 async function removePreviousBotComment() {
-  const api = new Octokit({
-    auth: core.getInput('ci_token'),
-  });
+  const api = new Octokit({auth: core.getInput('ci_token')});
 
   const { data } = await api.rest.issues.listComments({
     owner: github.context.issue.owner,
@@ -50,22 +49,13 @@ async function removePreviousBotComment() {
   })
 }
 
-async function pushCommentOnPr(targetPrDataList: {
-  title: string;
-  html_url: string;
-  state: string;
-  owner: string;
-  repo: string;
-  branch: string;
-}[]) {
-  const api = new Octokit({
-    auth: core.getInput('ci_token'),
-  });
+async function pushCommentOnPr(targetPrDataList: CommentTypes[]) {
+  const api = new Octokit({auth: core.getInput('ci_token')});
 
-  let body = `# xotoscript action info \n`
+  let body = `## xotoscript action info \n`
 
   for (let targetPrData of targetPrDataList) {
-    body += `## [${targetPrData.repo} - ${targetPrData.title}](${targetPrData.html_url})\n**pull request status**: ${targetPrData.state}\n**pipeline status**: ![worflow](https://github.com/${targetPrData.owner}/${targetPrData.repo}/actions/workflows/${core.getInput('target_workflow')}/badge.svg?branch=${targetPrData.branch})\n`
+    body += `#### [${targetPrData.repo} - ${targetPrData.title}](${targetPrData.html_url})\n**pull request status**: ${targetPrData.state}\n**pipeline status**:\n![worflow](https://github.com/${targetPrData.owner}/${targetPrData.repo}/actions/workflows/${core.getInput('target_workflow')}/badge.svg?branch=${targetPrData.branch})\n`
   }
 
   await api.rest.issues.createComment({
