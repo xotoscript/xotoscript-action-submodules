@@ -55,7 +55,7 @@ function getTargetPrData(targetOwner, targetRepo, targetBranch) {
             sort: "updated",
             state: "all"
         });
-        console.log(data);
+        console.log(targetOwner, targetRepo, targetBranch);
         if (data.length === 0)
             return null;
         const prData = data[0];
