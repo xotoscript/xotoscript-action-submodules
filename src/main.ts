@@ -23,7 +23,7 @@ async function getTargetPrData(targetOwner: string, targetRepo: string, targetBr
 }
 
 async function removePreviousBotComment() {
-  const api = new Octokit({auth: core.getInput('ci_token')});
+  const api = new Octokit({ auth: core.getInput('ci_token') });
 
   const { data } = await api.rest.issues.listComments({
     owner: github.context.issue.owner,
@@ -50,13 +50,16 @@ async function removePreviousBotComment() {
 }
 
 async function pushCommentOnPr(targetPrDataList: CommentTypes[]) {
-  const api = new Octokit({auth: core.getInput('ci_token')});
+  console.info(targetPrDataList)
+  const api = new Octokit({ auth: core.getInput('ci_token') });
 
   let body = `## xotoscript action info \n`
 
   for (let targetPrData of targetPrDataList) {
     body += `#### [${targetPrData.repo} - ${targetPrData.title}](${targetPrData.html_url})\n**pull request status**: ${targetPrData.state}\n**pipeline status**:\n![worflow](https://github.com/${targetPrData.owner}/${targetPrData.repo}/actions/workflows/${core.getInput('target_workflow')}/badge.svg?branch=${targetPrData.branch})\n`
   }
+
+  console.info(body)
 
   await api.rest.issues.createComment({
     owner: github.context.issue.owner,

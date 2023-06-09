@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "description": "TypeScript template action",
-  "main": "dist/index.js",
+  "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
-    "package": "ncc build --source-map --license licenses.txt lib/main.js",
+    "package": "ncc build --source-map --license licenses.txt",
     "all": "npm run build && npm run format && npm run lint && npm run package && npm test"
   },
   "repository": {
