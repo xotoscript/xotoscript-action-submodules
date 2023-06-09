@@ -55,6 +55,7 @@ function getTargetPrData(targetOwner, targetRepo, targetBranch) {
             sort: "updated",
             state: "all"
         });
+        console.log(data);
         if (data.length === 0)
             return null;
         const prData = data[0];
@@ -87,13 +88,11 @@ function removePreviousBotComment() {
 }
 function pushCommentOnPr(targetPrDataList) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.info(targetPrDataList);
         const api = new octokit_1.Octokit({ auth: core.getInput('ci_token') });
         let body = `## xotoscript action info \n`;
         for (let targetPrData of targetPrDataList) {
             body += `#### [${targetPrData.repo} - ${targetPrData.title}](${targetPrData.html_url})\n**pull request status**: ${targetPrData.state}\n**pipeline status**:\n![worflow](https://github.com/${targetPrData.owner}/${targetPrData.repo}/actions/workflows/${core.getInput('target_workflow')}/badge.svg?branch=${targetPrData.branch})\n`;
         }
-        console.info(body);
         yield api.rest.issues.createComment({
             owner: github.context.issue.owner,
             repo: github.context.issue.repo,
