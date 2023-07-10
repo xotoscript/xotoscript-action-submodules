@@ -31,8 +31,8 @@ custom-action:
         root_token: ${{ secrets.GH_PAT }}
         target_owner: xotoscript
         target_submodules: |
-          xotoscript-submodule-1
-          xotoscript-submodule-2
+          submodule-1
+          submodule-2
         target_branch: ${{ github.head_ref || github.ref_name }}
         target_workflow: ci-workflow.yml
 ```
