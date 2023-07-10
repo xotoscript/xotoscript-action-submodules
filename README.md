@@ -1,12 +1,12 @@
-# Xotoscript action submodules
+# xotoscript action submodules
 
-### Summary
+### summary
 
 When working with a repository that has multiple submodules, it can be difficult to keep track of changes and pipelines across all submodules. 
 
 This can lead to inefficiencies and errors in the development process. To address this problem, we have created a custom GitHub action that automatically creates a bot comment in the root pull request, listing all pull requests of submodules, including their status and pipeline.
 
-### Description
+### description
 
 To use this action, follow these steps:
 
@@ -48,6 +48,6 @@ custom-action:
 
 The action will automatically create a bot comment in the root pull request, listing all pull requests of submodules, including their status and pipeline.
 
-### Conclusion
+### conclusion
 
 With our custom GitHub action, you can easily keep track of changes and pipelines across all submodules in your repository, reducing inefficiencies and errors in the development process. Use this action in your workflow to improve your development process today.
